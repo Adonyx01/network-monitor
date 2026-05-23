@@ -1,0 +1,406 @@
+ 
+        /* Variables CSS pour faciliter les changements de thème */
+        :root {
+            --primary-color: #4A90E2; /* Bleu vibrant */
+            --secondary-color: #50B3A2; /* Vert d'eau */
+            --dark-background: #2C3E50; /* Bleu-gris foncé */
+            --light-background: #F4F7F6; /* Gris clair */
+            --text-color: #333;
+            --light-text-color: #ECF0F1; /* Gris très clair */
+            --shadow-light: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-medium: 0 6px 18px rgba(0,0,0,0.12);
+            --border-color: #E0E0E0; /* Gris clair pour les bordures */
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --info-color: #17a2b8;
+            --warning-color: #ffc107;
+            --inactive-color: #6c757d;
+        }
+
+        /* Styles généraux du corps */
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            background-color: var(--light-background);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Conteneur principal du tableau de bord */
+        .admin-dashboard {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Empêche le défilement horizontal */
+        }
+
+        /* En-tête du tableau de bord */
+        .dashboard-header {
+            background: linear-gradient(to right, var(--dark-background), #3C576F);
+            color: var(--light-text-color);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-medium);
+            z-index: 10; /* Pour s'assurer qu'il reste au-dessus */
+        }
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            letter-spacing: 0.5px;
+        }
+        .header-nav .logout-btn {
+            background-color: var(--error-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .header-nav .logout-btn:hover {
+            background-color: #c0392b; /* Rouge plus foncé */
+            transform: translateY(-2px);
+        }
+
+        /* Contenu principal (sidebar + main-content) */
+        .dashboard-content {
+            display: flex;
+            flex-grow: 1;
+            padding-top: 0; /* Pas de padding top ici, car le header gère ça */
+        }
+
+        /* Barre latérale de navigation */
+        .sidebar {
+            width: 250px;
+            background-color: #34495e; /* Légerement plus clair que le header */
+            padding: 20px 0; /* Padding vertical, pas horizontal */
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+            flex-shrink: 0; /* Empêche le sidebar de rétrécir */
+            transition: width 0.3s ease;
+        }
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-nav a {
+            display: block;
+            color: var(--light-text-color);
+            padding: 15px 25px;
+            text-decoration: none;
+            border-left: 5px solid transparent; /* Bordure pour l'indicateur actif */
+            transition: background-color 0.3s ease, color 0.3s ease, border-left-color 0.3s ease;
+            font-size: 1.05em;
+        }
+        .sidebar-nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-left-color: var(--secondary-color);
+        }
+        .sidebar-nav a.active {
+            background-color: var(--primary-color);
+            border-left-color: var(--secondary-color);
+            font-weight: bold;
+            color: white;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        /* Contenu principal des sections */
+        .main-content {
+            flex-grow: 1;
+            padding: 25px;
+            background-color: var(--light-background);
+        }
+        .main-content section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 25px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .main-content section:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        .main-content section h2 {
+            color: var(--dark-background);
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        /* Actions de section (boutons au-dessus des tables/graphiques) */
+        .section-actions {
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+            gap: 15px; /* Espacement entre les boutons/éléments */
+            align-items: center;
+        }
+        .section-actions button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-actions .run-test-btn,
+        .section-actions .generate-pdf-btn {
+            background: linear-gradient(to right, var(--primary-color), #6BB9F0);
+            color: white;
+        }
+        .section-actions .run-test-btn:hover,
+        .section-actions .generate-pdf-btn:hover {
+            background: linear-gradient(to right, #6BB9F0, var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .section-actions p {
+            margin: 0;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        /* Messages de succès/erreur */
+        .message-container {
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid;
+            transition: all 0.3s ease;
+        }
+        .message-success {
+            background-color: #e6ffed; /* Très léger vert */
+            color: var(--success-color);
+            border-color: #a3e9c5;
+        }
+        .message-error {
+            background-color: #ffe6e6; /* Très léger rouge */
+            color: var(--error-color);
+            border-color: #ffb3b3;
+        }
+        .detailed-error-message {
+            background-color: #fff3e0; /* Très léger orange */
+            color: #ff9800; /* Orange plus vif */
+            border: 1px solid #ffcc80;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            text-align: left;
+            word-wrap: break-word;
+            font-weight: normal; /* Le message détaillé n'est pas en gras */
+        }
+
+        /* Styles des tableaux de données */
+        .data-table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden; /* Pour les bords arrondis du tableau */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .data-table h3 {
+            background-color: #f8f8f8;
+            padding: 15px 20px;
+            margin: 0;
+            font-size: 1.3em;
+            color: #555;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .data-table th {
+            background-color: #F0F4F8; /* Un bleu-gris très clair */
+            color: var(--dark-background);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9; /* Alternating row color */
+        }
+        .data-table tbody tr:hover {
+            background-color: #eef7ff; /* Hover effect for rows */
+        }
+        .data-table td {
+            color: #444;
+        }
+
+        /* Statuts spécifiques dans les tableaux */
+        .status-actif { color: var(--success-color); font-weight: 600; }
+        .status-inactif { color: var(--error-color); font-weight: 600; }
+        /* Pour les alertes, si elles sont réintroduites ou si elles existent en lecture seule */
+        .alert-critique { color: var(--error-color); font-weight: bold; }
+        .alert-avertissement { color: var(--warning-color); font-weight: bold; }
+        .alert-information { color: var(--info-color); font-weight: bold; }
+        .alert-inactive { text-decoration: line-through; color: var(--inactive-color); }
+
+        /* Styles pour les conteneurs de graphiques */
+        .chart-container {
+            width: 100%;
+            max-width: 500px; /* Limite pour les petits graphiques */
+            margin: 20px auto; /* Centrage pour les petits graphiques */
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            display: flex; /* Pour centrer le canvas */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Permet au titre d'être au-dessus */
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* S'adapte mieux aux écrans */
+            gap: 25px;
+            justify-content: center;
+            align-items: start;
+            margin-bottom: 30px;
+        }
+        /* Style spécifique pour le graphique de latence agrandi */
+        .charts-grid .chart-container:last-child {
+            grid-column: span 2; /* S'étend sur deux colonnes pour être plus large */
+            max-width: none; /* Supprime la max-width pour ce graphique */
+            height: 420px; /* Hauteur fixe pour le rendre plus grand */
+            padding: 25px; /* Plus de padding pour l'agrandi */
+        }
+        .chart-container canvas {
+            max-width: 100%;
+            height: auto; /* Permet au canvas de s'adapter */
+        }
+
+
+        /* Classe pour cacher les sections */
+        .hidden-section {
+            display: none;
+        }
+        /* Message de chargement pour le test de connectivité */
+        .loading-message {
+            background-color: #e7f3fe; /* Bleu clair */
+            color: #0056b3; /* Bleu foncé */
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            display: none; /* Caché par défaut */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Media Queries pour la responsivité */
+        @media (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .dashboard-header h1 {
+                margin-bottom: 10px;
+                font-size: 1.5em;
+            }
+            .dashboard-content {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 10px 0;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            .sidebar-nav {
+                display: flex;
+                overflow-x: auto; /* Permet de scroller horizontalement sur mobile */
+                -webkit-overflow-scrolling: touch; /* Améliore le défilement sur iOS */
+                padding: 0 10px;
+            }
+            .sidebar-nav a {
+                flex-shrink: 0; /* Empêche les liens de rétrécir */
+                padding: 10px 15px;
+                text-align: center;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                margin-bottom: 0;
+            }
+            .sidebar-nav a.active {
+                border-left: none;
+                border-bottom-color: var(--secondary-color);
+            }
+            .main-content {
+                padding: 15px;
+            }
+            .main-content section {
+                padding: 20px;
+                border-radius: 8px;
+            }
+            .main-content section h2 {
+                font-size: 1.6em;
+                margin-bottom: 15px;
+            }
+            .data-table th, .data-table td {
+                padding: 10px;
+                font-size: 0.85em;
+            }
+            /* Masquer certaines colonnes dans les tableaux pour les petits écrans */
+            .data-table th:nth-child(1), .data-table td:nth-child(1), /* ID */
+            .data-table th:nth-child(6), .data-table td:nth-child(6), /* Localisation */
+            .data-table th:nth-child(8), .data-table td:nth-child(8) { /* Créé par dans appareils */
+                display: none;
+            }
+            .charts-grid {
+                grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+            }
+            .charts-grid .chart-container:last-child {
+                grid-column: span 1; /* Retour à une seule colonne */
+                height: 300px; /* Ajuster la hauteur pour mobile */
+            }
+            .section-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .section-actions button {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-header h1 {
+                font-size: 1.2em;
+            }
+            .header-nav .logout-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .main-content section {
+                padding: 15px;
+            }
+            .data-table th, .data-table td {
+                padding: 8px;
+            }
+            /* Masquer encore plus de colonnes si nécessaire */
+            .data-table th:nth-child(2), .data-table td:nth-child(2), /* Nom */
+            .data-table th:nth-child(3), .data-table td:nth-child(3) { /* IP */
+                /* Peut-être masquer si trop petit ou faire un affichage alternatif */
+            }
+        }
+    

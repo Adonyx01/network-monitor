@@ -1,0 +1,447 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    /* Image en fond */
+    background: url('cree un backgroung pour mon appli de monitoring reseaux.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #e0e0e0; /* Texte principal clair pour le fond sombre */
+    line-height: 1.6;
+}
+
+.admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.dashboard-header {
+    background-color: rgba(26, 58, 58, 0.9); /* Fond sombre semi-transparent */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4DD0E1; /* Ligne d'accentuation */
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #66D9EF; /* Couleur de titre claire */
+    font-weight: 700;
+}
+
+.header-nav .logout-btn {
+    background-color: #dc3545; /* Rouge pour déconnexion (couleur standard pour l'action) */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+.dashboard-content {
+    display: flex;
+    flex: 1; /* Prend l'espace restant */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #1A3A3A; /* Barre latérale sombre, couleur de l'image */
+    color: white;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 15px 25px;
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-left: 5px solid transparent; /* Pour l'indicateur actif */
+}
+
+.sidebar-nav a:hover {
+    background-color: #2A4A4A; /* Légèrement plus clair au survol */
+    color: white;
+}
+
+.sidebar-nav a.active {
+    background-color: #4DD0E1; /* Couleur d'accentuation vive de l'image */
+    color: #1A3A3A; /* Texte sombre sur fond clair */
+    border-left-color: #4DD0E1;
+}
+
+.main-content {
+    flex: 1; /* Prend l'espace restant */
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fond blanc semi-transparent pour le contenu principal */
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    color: #343a40; /* Texte principal foncé pour le contenu */
+}
+
+/* Gère l'affichage des sections sans JavaScript */
+.main-content section {
+    display: none; /* Les sections sont cachées par défaut, JS les affichera */
+}
+
+/* La première section visible par défaut, ou celle activée par JS */
+.main-content section:first-child:not(.hidden-section),
+.main-content section:not(.hidden-section) { /* Ensure this applies when JS removes hidden-section */
+    display: block;
+}
+
+/* Classe utilisée par JS pour cacher/montrer les sections et formulaires */
+.hidden-section {
+    display: none !important; /* Important pour forcer le masquage */
+}
+
+
+h2 {
+    color: #1A3A3A; /* Couleur de titre sombre */
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    border-bottom: 2px solid #4DD0E1; /* Ligne d'accentuation */
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #343a40; /* Texte des sous-titres plus foncé */
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.section-actions {
+    margin-bottom: 20px;
+}
+
+/* Styles pour les boutons */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 10px;
+    color: white; /* Texte blanc par défaut sur les boutons colorés */
+}
+
+.add-btn {
+    background-color: #4DD0E1; /* Couleur d'accentuation pour ajouter */
+}
+
+.add-btn:hover {
+    background-color: #66D9EF;
+    transform: translateY(-1px);
+}
+
+.edit-btn {
+    background-color: #66D9EF; /* Couleur plus claire pour modifier */
+    color: #1A3A3A; /* Texte sombre sur fond clair */
+}
+
+.edit-btn:hover {
+    background-color: #88E1F2;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Rouge pour supprimer (gardé standard pour danger) */
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.submit-btn {
+    background-color: #4DD0E1; /* Bouton principal aux couleurs du thème */
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #66D9EF;
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    background-color: #6c757d; /* Gris pour annuler */
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+/* Style pour le bouton "Lancer le test de connectivité" et "Générer PDF" */
+.section-actions .run-test-btn, .section-actions .generate-pdf-btn {
+    background-color: #2980b9; /* Blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+.section-actions .run-test-btn:hover, .section-actions .generate-pdf-btn:hover {
+    background-color: #2471a3;
+}
+
+
+/* Styles pour les tables */
+.data-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    border: 1px solid #dee2e6;
+    text-align: left;
+    color: #343a40; /* Texte des tables foncé */
+}
+
+.data-table th {
+    background-color: #e9ecef;
+    font-weight: 700;
+    color: #495057;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.data-table tbody tr:hover {
+    background-color: #e0e0e0;
+}
+
+/* Style pour les boutons d'action dans les tableaux (spécifiques) */
+.data-table button {
+    margin: 2px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 0.9em;
+}
+.data-table button.edit-btn { background-color: #007bff; color: white; }
+.data-table button.delete-btn { background-color: #dc3545; color: white; }
+.data-table button.reset-password-btn { background-color: #6c757d; color: white; }
+.data-table button.ping-btn { background-color: #007bff; color: white; }
+
+
+.status-actif {
+    color: #28a745; /* Vert pour en ligne */
+    font-weight: 500;
+}
+
+.status-inactif {
+    color: #dc3545; /* Rouge pour hors ligne */
+    font-weight: 500;
+}
+
+.status-en_maintenance {
+    color: #ffc107; /* Jaune pour en maintenance */
+    font-weight: 500;
+}
+
+.alert-critique { color: #dc3545; font-weight: bold; }
+.alert-avertissement { color: #ffc107; font-weight: bold; }
+.alert-information { color: #17a2b8; font-weight: bold; }
+.alert-inactive { text-decoration: line-through; color: #6c757d; }
+
+
+/* Styles pour les formulaires */
+.form-section {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin-top: 30px;
+    color: #343a40; /* Texte des formulaires foncé */
+}
+
+/* La classe hidden-section est maintenant gérée globalement pour masquer les éléments */
+/* .form-section.hidden-section {
+    display: none;
+} */
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"],
+.input-group input[type="datetime-local"],
+.input-group input[type="number"],
+.input-group textarea,
+.input-group select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-section textarea {
+    resize: vertical;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #4DD0E1; /* Couleur de focus du thème */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(77, 208, 225, 0.25);
+}
+
+.monitoring-placeholder {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e0e0e0; /* Fond plus clair pour le placeholder */
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+    text-align: center;
+    color: #555;
+}
+
+.monitoring-placeholder ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.monitoring-placeholder li {
+    background-color: #c0c0c0; /* Couleur des éléments de liste */
+    margin-bottom: 5px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: #333;
+}
+
+/* Styles pour les messages de succès/erreur */
+.message-container {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+.message-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.message-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+/* Style pour le message d'erreur détaillé */
+.detailed-error-message {
+    background-color: #ffe0b2;
+    color: #e65100;
+    border: 1px solid #ffb74d;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+/* Styles pour les conteneurs de graphiques */
+.chart-container {
+    width: 100%;
+    max-width: 500px; /* Limite la taille des graphiques pour une meilleure lisibilité */
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: start;
+}
+
+/* Message de chargement pour le test de connectivité */
+.loading-message {
+    background-color: #e7f3fe; /* Bleu clair */
+    color: #0056b3; /* Bleu foncé */
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    display: none; /* Caché par défaut */
+}
+/* Style pour la zone de résultat du ping */
+.ping-result-area {
+    background-color: #f0f8ff;
+    border: 1px solid #cce5ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 30px;
+    font-family: Arial, sans-serif; /* Police normale */
+    font-size: 0.9em;
+    color: #333;
+    white-space: pre-wrap; /* Maintient les sauts de ligne du résultat de la commande */
+    max-height: 300px; /* Limite la hauteur */
+    overflow-y: auto; /* Ajoute un défilement si le contenu est trop grand */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+/* .ping-result-area.hidden-section {
+    display: none;
+} */
+.ping-result-area pre {
+    margin: 0;
+}
+.ping-result-area .loading-indicator {
+    text-align: center;
+    font-style: italic;
+    color: #6c757d;
+}
+/* Styles pour les messages de résultat de ping */
+.ping-success {
+    color: #28a745; /* Vert pour succès */
+    font-weight: bold;
+}
+.ping-failure {
+    color: #dc3545; /* Rouge pour échec */
+    font-weight: bold;
+}
