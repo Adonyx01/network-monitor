@@ -613,8 +613,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com'; // REMPLACEZ PAR VOTRE HÔTE SMTP
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'juniormbomoh@gmail.com';   // REMPLACEZ PAR VOTRE ADRESSE E-MAIL D'ENVOI
-            $mail->Password   = 'euhl zawy lskr eitv';         // REMPLACEZ PAR LE MOT DE PASSE DE VOTRE E-MAIL
+            $mail->Username   = 'votre_email@gmail.com';        // REMPLACEZ PAR VOTRE ADRESSE E-MAIL D'ENVOI
+            $mail->Password   = 'votre_mot_de_passe_application'; // REMPLACEZ PAR LE MOT DE PASSE D'APPLICATION GMAIL
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
